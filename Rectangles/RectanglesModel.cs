@@ -27,13 +27,14 @@
 
 		private void OnTick(int tickNum)
 		{
+			RemoveRectsIfNeeded();
 			CreateRect();
 			RemoveRectsIfNeeded();
 		}
 
 		private void CreateRect()
 		{
-			var rect = new RectangleWrapper(_view);
+			var rect = RectangleWrapper.GetRandomRect(_view);
 			foreach (var intersection in rect.GetIntersections())
 				ScheduleRectRemove(intersection, IntersectedRectLifetimeTicks);
 			_view.AddRectangle(rect);
@@ -44,14 +45,8 @@
 			if (!rectsToDelete.ContainsKey(_tickNum))
 				return;
 			foreach (var rect in rectsToDelete[_tickNum])
-				RemoveRect(rect);
+				rect.Remove();
 			rectsToDelete.Remove(_tickNum);
-		}
-
-		private void RemoveRect(RectangleWrapper rect)
-		{
-			_view.RemoveRectangle(rect);
-			rect.Remove();
 		}
 
 		private void ScheduleRectRemove(RectangleWrapper rect, int delayTicks)

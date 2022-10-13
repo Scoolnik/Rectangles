@@ -23,7 +23,7 @@ namespace Rectangles
 
 		private void InitCanvas()
 		{
-			canvas.Image = new Bitmap(Width, Height);
+			canvas.Image = new Bitmap(canvas.Width, canvas.Height);
 			Graphics g = Graphics.FromImage(canvas.Image);
 			g.FillRectangle(new SolidBrush(ColorHelper.BackgroundColor), 0, 0, canvas.Image.Width, canvas.Image.Height);
 		}

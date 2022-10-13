@@ -1,17 +1,30 @@
-﻿namespace Rectangles
+﻿using System.Windows.Forms;
+
+namespace Rectangles
 {
 	public class RectangleWrapper
 	{
 		public Rectangle Rectangle { get; }
 		public Color Color { get; }
 
-		private static List<RectangleWrapper> _wrappers = new List<RectangleWrapper>();
+		private IView _view;
 
-		public RectangleWrapper(IView _view)
+		private static HashSet<RectangleWrapper> _wrappers = new();
+
+		public RectangleWrapper(IView view, Rectangle rect, Color color)
 		{
-			Rectangle = RectangleHelper.GetRandom(_view.GetCanvasSize());
-			Color = ColorHelper.GetRandom();
+			_view = view;
+			Rectangle = rect;
+			Color = color;
+			_view.AddRectangle(this);
 			_wrappers.Add(this);
+		}
+
+		public static RectangleWrapper GetRandomRect(IView view)
+		{
+			var rect = RectangleHelper.GetRandom(view.GetCanvasSize());
+			var color = ColorHelper.GetRandom();
+			return new RectangleWrapper(view, rect, color);
 		}
 
 		public RectangleWrapper[] GetIntersections()
@@ -19,6 +32,15 @@
 			return _wrappers.Where(x => x != this && x.Rectangle.IntersectsWith(Rectangle)).ToArray();
 		}
 
-		internal void Remove() => _wrappers.Remove(this);
+		public void Remove()
+		{
+			_view.RemoveRectangle(this);
+			_wrappers.Remove(this);
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(Rectangle.GetHashCode(), Color.GetHashCode());
+		}
 	}
 }
