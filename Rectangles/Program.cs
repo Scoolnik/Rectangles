@@ -11,7 +11,9 @@ namespace Rectangles
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
-			Application.Run(new Form1());
+			var view = new Form1();
+			var rectsModel = new RectanglesModel(view);
+			Application.Run(view);
 		}
 	}
 }
