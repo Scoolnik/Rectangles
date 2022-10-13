@@ -30,8 +30,7 @@
 		private void RemoveRectangle(RectangleWrapper rect)
 		{
 			_view.RemoveRectangle(rect);
-			if (!_rectangles.Remove(rect))
-				throw new Exception();
+			_rectangles.Remove(rect);
 		}
 	}
 }
