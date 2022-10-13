@@ -1,5 +1,4 @@
 using Ninject;
-using System.Runtime.Serialization;
 
 namespace Rectangles
 {
@@ -15,10 +14,9 @@ namespace Rectangles
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 			var container = ConfigureContainer();
-			var view = container.Get<MainForm>();
 			var rectsCreater = container.Get<RectanglesCreater>();
 			container.Get<IUpdateModel>().Start();
-			Application.Run(view);
+			Application.Run(container.Get<MainForm>());
 		}
 
 		public static StandardKernel ConfigureContainer()
