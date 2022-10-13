@@ -6,7 +6,7 @@
 
 		private static readonly Random rand = new Random();
 		private const int MaxColorIndex = 255;
-		
+
 		internal static Color GetRandom()
 		{
 			return Color.FromArgb(rand.Next(MaxColorIndex), rand.Next(MaxColorIndex), rand.Next(MaxColorIndex));

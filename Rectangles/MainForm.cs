@@ -1,8 +1,8 @@
 namespace Rectangles
 {
-	public partial class Form1 : Form, IView
+	public partial class MainForm : Form, IView
 	{
-		public Form1()
+		public MainForm()
 		{
 			InitializeComponent();
 			Text = "";
