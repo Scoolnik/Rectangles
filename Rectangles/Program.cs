@@ -1,3 +1,6 @@
+using Ninject;
+using System.Runtime.Serialization;
+
 namespace Rectangles
 {
 	internal static class Program
@@ -11,13 +14,22 @@ namespace Rectangles
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
-			var view = new MainForm();
-			var updateModel = new UpdateModel();
-			var actionsScheduler = new ActionsScheduler(updateModel);
-			var rectsModel = new RectanglesModel(view);
-			var rectsCreater = new RectanglesCreater(view, rectsModel, updateModel);
-			updateModel.Start();
+			var container = ConfigureContainer();
+			var view = container.Get<MainForm>();
+			var rectsCreater = container.Get<RectanglesCreater>();
+			container.Get<IUpdateModel>().Start();
 			Application.Run(view);
+		}
+
+		public static StandardKernel ConfigureContainer()
+		{
+			var container = new StandardKernel();
+			container.Bind<MainForm, IView>().To<MainForm>().InSingletonScope();
+			container.Bind<IUpdateModel>().To<UpdateModel>().InSingletonScope();
+			container.Bind<ActionsScheduler>().ToSelf().InSingletonScope();
+			container.Bind<IRectanglesModel>().To<RectanglesModel>().InSingletonScope();
+			container.Bind<RectanglesCreater>().ToSelf().InSingletonScope();
+			return container;
 		}
 	}
 }
