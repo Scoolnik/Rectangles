@@ -4,9 +4,9 @@
 	{
 		private readonly IView _view;
 		private readonly IUpdateModel _updateModel;
-		private readonly RectanglesModel _rectanglesModel;
+		private readonly IRectanglesModel _rectanglesModel;
 
-		public RectanglesCreater(IView view, RectanglesModel rectanglesModel, IUpdateModel updateModel)
+		public RectanglesCreater(IView view, IRectanglesModel rectanglesModel, IUpdateModel updateModel)
 		{
 			_view = view;
 			_rectanglesModel = rectanglesModel;

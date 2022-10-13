@@ -1,6 +1,6 @@
 ﻿namespace Rectangles
 {
-	public class RectanglesModel
+	public class RectanglesModel : IRectanglesModel
 	{
 		private readonly HashSet<RectangleWrapper> _rectangles = new();
 
