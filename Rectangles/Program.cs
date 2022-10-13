@@ -12,7 +12,11 @@ namespace Rectangles
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 			var view = new MainForm();
+			var updateModel = new UpdateModel();
+			var actionsScheduler = new ActionsScheduler(updateModel);
 			var rectsModel = new RectanglesModel(view);
+			var rectsCreater = new RectanglesCreater(view, rectsModel, updateModel);
+			updateModel.Start();
 			Application.Run(view);
 		}
 	}
