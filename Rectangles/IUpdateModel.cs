@@ -4,9 +4,9 @@
 	{
 		int TickNum { get; }
 
-		event Action<int> Update;
+		event Action Update;
 
-		event Action<int> LateUpdate;
+		event Action LateUpdate;
 
 		void Start();
 	}

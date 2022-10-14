@@ -24,8 +24,9 @@
 			_scheduledActions[tickNum].Add(task);
 		}
 
-		private void OnUpdate(int tick)
+		private void OnUpdate()
 		{
+			var tick = _updateModel.TickNum;
 			if (!_scheduledActions.ContainsKey(tick))
 				return;
 			foreach (var rect in _scheduledActions[tick])

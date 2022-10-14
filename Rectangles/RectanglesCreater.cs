@@ -14,7 +14,7 @@
 			_updateModel.LateUpdate += OnLateUpdate;
 		}
 
-		private void OnLateUpdate(int tickNum)
+		private void OnLateUpdate()
 		{
 			CreateRandomRect();
 		}

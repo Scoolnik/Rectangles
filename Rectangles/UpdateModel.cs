@@ -2,8 +2,8 @@
 {
 	public class UpdateModel : IUpdateModel
 	{
-		public event Action<int> Update;
-		public event Action<int> LateUpdate;
+		public event Action Update;
+		public event Action LateUpdate;
 
 		public int TickNum => _tickNum;
 
@@ -23,8 +23,8 @@
 		private void OnTimerTick(object? s, EventArgs e)
 		{
 			_tickNum++;
-			Update?.Invoke(_tickNum);
-			LateUpdate?.Invoke(_tickNum);
+			Update?.Invoke();
+			LateUpdate?.Invoke();
 		}
 	}
 }
