@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Rectangles
+﻿namespace Rectangles
 {
 	public class Canvas : PictureBox, IView
 	{
