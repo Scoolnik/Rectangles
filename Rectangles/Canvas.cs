@@ -30,5 +30,12 @@
 			graphics.DrawRectangle(pen, rect);
 			Invalidate();
 		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+				graphics?.Dispose();
+			base.Dispose(disposing);
+		}
 	}
 }
