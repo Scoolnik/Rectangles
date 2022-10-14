@@ -24,14 +24,16 @@ namespace Rectangles
 		private void InitCanvas()
 		{
 			canvas.Image = new Bitmap(canvas.Width, canvas.Height);
-			Graphics g = Graphics.FromImage(canvas.Image);
-			g.FillRectangle(new SolidBrush(ColorHelper.BackgroundColor), 0, 0, canvas.Image.Width, canvas.Image.Height);
+			using Graphics g = Graphics.FromImage(canvas.Image);
+			using Brush brush = new SolidBrush(ColorHelper.BackgroundColor);
+			g.FillRectangle(brush, 0, 0, canvas.Image.Width, canvas.Image.Height);
 		}
 
 		private void DrawRectangle(Rectangle rect, Color color)
 		{
 			using Graphics g = Graphics.FromImage(canvas.Image);
-			g.DrawRectangle(new Pen(color), rect);
+			using Pen pen = new(color);
+			g.DrawRectangle(pen, rect);
 			canvas.Invalidate();
 		}
 	}
