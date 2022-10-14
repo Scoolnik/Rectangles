@@ -3,7 +3,7 @@
 	public interface IView
 	{
 		void AddRectangle(RectangleWrapper rect);
-		Size GetCanvasSize();
+		Size GetSize();
 		void RemoveRectangle(RectangleWrapper rect);
 	}
 }

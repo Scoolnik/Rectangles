@@ -21,7 +21,7 @@
 
 		private void CreateRandomRect()
 		{
-			_rectanglesModel.AddRectangle(RectangleHelper.GetRandom(_view.GetCanvasSize()), ColorHelper.GetRandom());
+			_rectanglesModel.AddRectangle(RectangleHelper.GetRandom(_view.GetSize()), ColorHelper.GetRandom());
 		}
 	}
 }

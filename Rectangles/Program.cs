@@ -22,7 +22,8 @@ namespace Rectangles
 		public static StandardKernel ConfigureContainer()
 		{
 			var container = new StandardKernel();
-			container.Bind<MainForm, IView>().To<MainForm>().InSingletonScope();
+			container.Bind<Canvas, IView>().To<Canvas>().InSingletonScope();
+			container.Bind<MainForm>().ToSelf().InSingletonScope();
 			container.Bind<IUpdateModel>().To<UpdateModel>().InSingletonScope();
 			container.Bind<ActionsScheduler>().ToSelf().InSingletonScope();
 			container.Bind<IRectanglesModel>().To<RectanglesModel>().InSingletonScope();

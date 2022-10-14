@@ -1,40 +1,19 @@
 namespace Rectangles
 {
-	public partial class MainForm : Form, IView
+	public partial class MainForm : Form
 	{
-		public MainForm()
+		public MainForm(Canvas canvas)
 		{
 			InitializeComponent();
 			Text = "";
-			InitCanvas();
+			InitCanvas(canvas);
 		}
 
-		public Size GetCanvasSize() => canvas.Image.Size;
-
-		public void AddRectangle(RectangleWrapper rect)
+		private void InitCanvas(Canvas canvas)
 		{
-			DrawRectangle(rect.Rectangle, rect.Color);
-		}
-
-		public void RemoveRectangle(RectangleWrapper rect)
-		{
-			DrawRectangle(rect.Rectangle, ColorHelper.BackgroundColor);
-		}
-
-		private void InitCanvas()
-		{
-			canvas.Image = new Bitmap(canvas.Width, canvas.Height);
-			using Graphics g = Graphics.FromImage(canvas.Image);
-			using Brush brush = new SolidBrush(ColorHelper.BackgroundColor);
-			g.FillRectangle(brush, 0, 0, canvas.Image.Width, canvas.Image.Height);
-		}
-
-		private void DrawRectangle(Rectangle rect, Color color)
-		{
-			using Graphics g = Graphics.FromImage(canvas.Image);
-			using Pen pen = new(color);
-			g.DrawRectangle(pen, rect);
-			canvas.Invalidate();
+			Controls.Add(canvas);
+			canvas.Dock = DockStyle.Fill;
+			canvas.RecreateImage();
 		}
 	}
 }
