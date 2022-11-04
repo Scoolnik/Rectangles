@@ -2,39 +2,40 @@
 {
 	public class Canvas : PictureBox, IView
 	{
-		private Graphics graphics;
+		private Graphics _graphics;
 
 		public void RecreateImage()
 		{
 			Image = new Bitmap(Width, Height);
-			graphics = Graphics.FromImage(Image);
-			using Brush brush = new SolidBrush(ColorHelper.BackgroundColor);
-			graphics.FillRectangle(brush, 0, 0, Image.Width, Image.Height);
+			_graphics = Graphics.FromImage(Image);
+			Clear();
 		}
 
 		public Size GetSize() => Image.Size;
 
-		public void AddRectangle(RectangleWrapper rect)
+		public void Update(IEnumerable<RectangleWrapper> rects)
 		{
-			DrawRectangle(rect.Rectangle, rect.Color);
-		}
-
-		public void RemoveRectangle(RectangleWrapper rect)
-		{
-			DrawRectangle(rect.Rectangle, ColorHelper.BackgroundColor);
+			Clear();
+			foreach (var rect in rects)
+				DrawRectangle(rect.Rectangle, rect.Color);
 		}
 
 		private void DrawRectangle(Rectangle rect, Color color)
 		{
 			using Pen pen = new(color);
-			graphics.DrawRectangle(pen, rect);
+			_graphics.DrawRectangle(pen, rect);
 			Invalidate();
+		}
+
+		private void Clear()
+		{
+			_graphics.Clear(ColorHelper.BackgroundColor);
 		}
 
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
-				graphics?.Dispose();
+				_graphics?.Dispose();
 			base.Dispose(disposing);
 		}
 	}

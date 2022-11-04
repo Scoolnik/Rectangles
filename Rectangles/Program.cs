@@ -15,6 +15,7 @@ namespace Rectangles
 			ApplicationConfiguration.Initialize();
 			var container = ConfigureContainer();
 			var rectsCreater = container.Get<RectanglesCreater>();
+			var rectsPresenter = container.Get<RectanglesPresenter>();
 			container.Get<IUpdateModel>().Start();
 			Application.Run(container.Get<MainForm>());
 		}

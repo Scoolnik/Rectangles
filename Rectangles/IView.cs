@@ -2,8 +2,7 @@
 {
 	public interface IView
 	{
-		void AddRectangle(RectangleWrapper rect);
+		void Update(IEnumerable<RectangleWrapper> rects);
 		Size GetSize();
-		void RemoveRectangle(RectangleWrapper rect);
 	}
 }
