@@ -4,6 +4,11 @@
 	{
 		private Graphics _graphics;
 
+		public Canvas(IRectanglesModel model)
+		{
+			model.Changed += () => Update(model.Rectangles);
+		}
+
 		public void RecreateImage()
 		{
 			Image = new Bitmap(Width, Height);

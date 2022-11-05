@@ -10,6 +10,8 @@
 
 		private const int IntersectedRectLifetimeTicks = 1;
 
+		public event Action Changed;
+
 		public RectanglesModel(ActionsScheduler actionsScheduler)
 		{
 			_actionsScheduler = actionsScheduler;
@@ -19,6 +21,7 @@
 		{
 			var rectWrapper = new RectangleWrapper(rectangle, color);
 			_rectangles.Add(rectWrapper);
+			Changed?.Invoke();
 			foreach (var intersection in rectWrapper.GetIntersections(_rectangles))
 				ScheduleRectRemove(intersection, IntersectedRectLifetimeTicks);
 		}
@@ -31,6 +34,7 @@
 		private void RemoveRectangle(RectangleWrapper rect)
 		{
 			_rectangles.Remove(rect);
+			Changed?.Invoke();
 		}
 	}
 }
